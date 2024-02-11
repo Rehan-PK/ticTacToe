@@ -147,6 +147,18 @@ a.toString();   // returns "1"
 // & then only returned variables / functions like add, sub, mul, div maybe used outside the factory
 
 
+// data attributes HTML
+<article
+  id="electric-cars"
+  data-columns="3"
+  data-index-number="12314"
+  data-parent="cars">
+  …
+</article>
+
+article.dataset.columns         // "3"
+article.dataset.indexNumber     // "12314"
+article.dataset.parent          // "cars"
 
 
 
