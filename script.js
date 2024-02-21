@@ -62,21 +62,8 @@ function game() {
         // check for winner
         const checkForWinner = () => {
             // check all winning conditions
-                // get array(row) of currentBoard having all values equal to 1
-                if (currentBoard.filter(row => row.filter(item => item === activePlayerMark).length === 3).length > 0) {
-                    return console.log(activePlayer);
-                }
-                // get column of currentBoard having all values equal to 1
-                let winCondition = 0;
-                for (let i = 0; i < 2; i++) {
-                    if (currentBoard.filter(row => row[i] === activePlayerMark).length === 3) {
-                        // winCondition++;
-                        // console.log(winCondition);
-                        return console.log(activePlayer);
-                    }
-                };
                 // get diagonals of currentBoard having all values equal to 1
-                let diagonal1 = 0, diagonal2 = 0;
+                let diagonal1 = 0, diagonal2 = 0, columnWin = 0;
                 for (let i = 2; i > -1; i--) {
                     if (currentBoard[i][i] === activePlayerMark) {
                         diagonal1++;
@@ -87,10 +74,28 @@ function game() {
                         diagonal2++;
                     }
                 };
-                
-                if (diagonal1 === 3 || diagonal2 === 3) {
-                    return console.log(activePlayer);
+                // DIAGONAL 2 IS NOT WORKING - FIX IT !!!
+
+                // get column of currentBoard having all values equal to 1
+                for (let i = 0; i < 2; i++) {
+                    if (currentBoard.filter(row => row[i] === activePlayerMark).length === 3) {
+                        // winCondition++;
+                        // console.log(winCondition);
+                        columnWin = 3;
+                    }
                 };
+
+                // get array(row) of currentBoard having all values equal to 1
+                if (currentBoard.filter(row => row.filter(item => item === activePlayerMark).length === 3).length > 0) {
+                    return console.log(activePlayer);
+                } else if (diagonal1 === 3 || diagonal2 === 3 || columnWin === 3) {
+                    return console.log(activePlayer);
+                } else {
+                    // if no blank cell in currentBoard, console.log("it's a tie")
+                    if (currentBoard.filter(row => row.filter(item => item === 0).length === 1) === false) {
+                        return console.log("It's a tie !");
+                    }
+                }
         };
 
         checkForWinner();
@@ -101,6 +106,5 @@ function game() {
     
     // make available the insertPlayerMark()
     return { insertPlayerMark };
-    
 }
 
